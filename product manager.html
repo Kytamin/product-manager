@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>manager</title>
+    <style>
+        button{
+            background-color: darkgreen;
+            color: white;
+        }
+        .Add{
+            background-color: darkgreen;
+            color: lightgrey;
+        }
+        .Fisrt{
+            background-color: darkgray;
+            display: inline-block;
+            padding-top: 25px;
+            padding-left: 5px;
+            padding-right: 25px;
+            padding-bottom: 25px;
+        }
+        table{
+            width: 18%;
+        }
+    </style>
+</head>
+<body>
+<div><h1>Add new Product</h1></div>
+<div class="Fisrt">
+    <input id="txtProduct" type="text" placeholder="New product">&nbsp<input class="Add" type="button" value="Add"
+                                                                             onclick="addValue()">
+</div>
+<div id="result"></div>
+</body>
+</html>
+<script>
+    let array = []
+    function addValue() {
+        array.push(document.getElementById("txtProduct").value)
+        document.getElementById("txtProduct").value = "";
+
+        let str = "<table>"
+        for (let i = 0; i < array.length; i++) {
+            str += `<tr><td>${array[i]}<td>
+                    <td><button onclick='editValue(${i})'>Edit</button><td>
+                    <td><button onclick='deleteValue(${i})'>Delete</button></td> `
+        }
+        document.getElementById("result").innerHTML = str;
+    }
+
+    function editValue(i) {
+        array[i] = prompt("sửa")
+        let str = "<table>"
+        for (let i = 0; i < array.length; i++) {
+            str += `<tr><td>${array[i]}<td>
+                    <td><button onclick='editValue(${i})'>Edit</button><td>
+                    <td><button onclick='deleteValue(${i})'>Delete</button></td> `
+        }
+        document.getElementById("result").innerHTML = str;
+    }
+    function deleteValue(i){
+        if (confirm("bạn có muốn xóa")){
+            array.splice(i,1)
+        }
+        let str = "<table>"
+        for (let i = 0; i < array.length; i++) {
+            str += `<tr><td>${array[i]}<td>
+                    <td><button onclick='editValue(${i})'>Edit</button><td>
+                    <td><button onclick='deleteValue(${i})'>Delete</button></td> `
+        }
+        document.getElementById("result").innerHTML = str;
+    }
+
+</script>
